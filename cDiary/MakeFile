@@ -1,0 +1,2 @@
+cDiary: diary.c.c
+	$(cc) diary.c -o cDiary -Wall -Wextra -pedantic -std=c99
