@@ -1,0 +1,2 @@
+hotel: hotel.c
+	$(CC) hotel.c -o hotel -Wall -Wextra -pedantic -std=c99
