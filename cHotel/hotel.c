@@ -1,18 +1,80 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 
-struct Hotel {
-    int totalRooms;
-    int bookedRooms;
+struct Room {
+    char type[]; // single, double, family, luxury single, lux
+    bool luxury;
+    bool smoking;
+    bool clean;
+    int beds;
+    float price;
 };
 
-int checkAvailableRooms(struct Hotel h) {
-    return (h.totalRooms - h.bookedRooms); 
+struct Hotel {
+    int floors;
+    int totalRooms;
+    struct Rooms rooms[5][25]; // 5 floors with 25 rooms per 
+};
+
+struct Room createRoom(const char *name, bool luxury, bool smoking, bool clean, int beds, float price) {
+    struct Room r;
+    strcpy(r.type, name); 
+    r.luxury = luxury; r.smoking = smoking, r.clean = clean;
+    r.beds = beds; r.price = price;
+    return r;
+};
+
+struct Hotel createHotel(int floors, int roomsFloor) {
+    struct Hotel h;
+    h.floors = floors;
+    h.totalRooms = (floors * roomsFloor); // this is too perfect, rooms per floor should vary
+    for (f = 0; f <= floors; f++) {
+        if (f == floors) {
+            // presidential suite at top floor
+            struct Room presidential;
+            strcpy(presidential.type, "Presidential");
+            presidential.luxury = true; presidential.smoking = true; // you do whatever you want up here
+            h.rooms[f][0] = p;    
+        } else {
+            for (r = 0; r <= roomsFloor; r++) {
+                switch r {
+                    case 1:
+                        h.rooms[f][r] = createRoom("Single (Smoking Permitted)", false, true, true, 1, 100.00);
+                        break;
+                    case 2:
+                        h.rooms[f][r] = createRoom("Double (Smoking Permitted)", false, true, true, 2, 195.00);
+                        break;
+                    case 3:
+                        h.rooms[f][r] = createRoom("Family (Smoking Permitted)", false, true, true, 4, 275.00); 
+                        break;
+                    case <10:
+                        h.rooms[f][r] = createRoom("Single", false, false, true, 1, 89.00);
+                        break;
+                    case <18:
+                        h.rooms[f][r] = createRoom("Double", false, false, true, 2, 164.00);
+                        break;
+                    case (roomsFloor - 1):
+                        h.rooms[f][r] = createRoom("Family", false, false, true, 4, 250.00);
+                        break;
+                    case roomsFloor:
+                        h.rooms[f][r] = createRoom("Luxury", false, false, true, 1, 148.00);
+                        break;
+                }
+            }
+        }
+    }
+    return h;
 }
 
+
+int checkAvailableRooms(struct Hotel *h) {
+    return 0;
+}
+
+
 int main() {
-    struct Hotel h;
-    h.totalRooms = 20; 
-    h.bookedRooms = 15;
-    printf("%d rooms available.\n", checkAvailableRooms(h));
+    struct Hotel h = createHotel(5, 25);
+    // printf("%d rooms available.\n", checkAvailableRooms(&h));
     return 0;
 }
