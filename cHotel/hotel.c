@@ -67,6 +67,26 @@ struct Hotel createHotel(int floors, int roomsFloor) {
     return h;
 }
 
+/**
+    * @brief This function creates your hotel based off of your input
+    *
+    * @param floors easy, its the number of floors
+    * @param rpf rooms per floor
+    * @param  
+*/
+struct Hotel generateHotelWithArgs(int floors, int rpf) {
+    struct Hotel h;
+    for (int f = 0; f <= floors; f++) {
+        int l = f; // l is for level
+        for (int r = 0; r <= rpf; r++) {
+            int i;
+            printf("How many smoking rooms on floor # %d", l);
+            
+        }
+    }
+
+    return h;
+}
 
 int checkAvailableRooms(struct Hotel *h) {
     return 0;
